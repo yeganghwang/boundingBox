@@ -181,10 +181,9 @@ class MainWindow(QMainWindow):
         if self.result_img is not None:
             file_path, _ = QFileDialog.getSaveFileName(self, '결과 이미지 저장', '', 'JPEG Files (*.jpg);;PNG Files (*.png)')
             if file_path:
-                # result_img는 화면 표시용이므로, 원본 해상도로 다시 추론해서 저장
                 results = self.yolo_model(self.cv_img)
                 orig_result_img = results[0].plot()
-                cv2.imwrite(file_path, cv2.cvtColor(orig_result_img, cv2.COLOR_RGB2BGR))
+                cv2.imwrite(file_path, orig_result_img)
                 QMessageBox.information(self, '저장 완료', f'결과 이미지가 저장되었습니다:\n{file_path}')
 
 if __name__ == '__main__':
